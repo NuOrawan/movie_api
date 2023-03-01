@@ -1,1 +1,6 @@
 /nbproject/private/
+.DS_Store
+.vscode
+.eslinrc.js
+/nbproject/
+/src/.DS_Store
