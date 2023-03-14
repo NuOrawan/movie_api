@@ -5,6 +5,18 @@ const express = require('express'),
 const app = express();
 
 app.use(bodyParser.json());
+// List of users
+let users = [
+    {
+        "id" : 1,
+        "name" : "Ann Marie",
+        "username" : "annm2023",
+        "password" : "marA0312",
+        "email" : "ann_marie@gmail.com",
+        "favoritemovies" : []
+
+    } 
+]
 // List of movies including description, genre, director, image URL
 let movies = [
     {   
@@ -137,6 +149,31 @@ app.get('/movies/directors/:directorName', (req,res)=>{
         res.status(400).send('No such director.')
 
     }
+});
+// Add a new user.
+app.post('/users',(req,res) =>{
+    res.send('Successful POST request returning data of the new user and a message that the user was sucessfully added');
+});
+
+// Update their user info (username).
+app.put('/users/:userName', (req, res) => {
+    res.send('Successful PUT request returning a message indicating the username was sucessfully updated.');
+    
+});
+
+// Add a movie to user's list of favorites showing only a response with text that a movie has been added.
+app.post('/users/:id/:movieTitle', (req, res) => {
+    res.send('MovieTitle has been added to this user\'s id.');
+});
+
+// Remove a movie from their list of favorites showing only a text that a movie has been removed.
+app.delete('/users/:id/:movieTitle', (req, res) => {
+    res.send('MovieTitle has been removed from this user\'s id.');
+});
+
+// Deregister a user showing only a text that a user email has been removed.
+app.delete('users/:id', (req, res) =>{
+    res.send('User\'s email has been removed from this user\'s id.');
 });
 // Listen for request
 app.listen(8080, () => {
