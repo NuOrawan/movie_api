@@ -4,7 +4,10 @@
   "description": "",
   "main": "./src/js/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/js/index.js",
+    "dev": "nodemon src/js/index.js"
+
   },
   "repository": {
     "type": "git",
@@ -20,10 +23,11 @@
   "dependencies": {
     "body-parser": "^1.20.2",
     "express": "^4.18.2",
-    "lodash": "^4.17.21",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "eslint": "^8.35.0"
+    "eslint": "^8.35.0",
+    "nodemon": "^2.0.21"
   }
 }
