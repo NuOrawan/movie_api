@@ -1,7 +1,7 @@
 const express = require('express'),
     bodyParser = require('body-parser'),
    uuid    = require('uuid');      
-//let path = require('path');        
+let path = require('path');        
 const app = express();
 
 app.use(bodyParser.json());
@@ -175,6 +175,8 @@ app.delete('/users/:id/:movieTitle', (req, res) => {
 app.delete('users/:id', (req, res) =>{
     res.send('User\'s email has been removed from this user\'s id.');
 });
+// Send static file ie. public/documentation.html Currently __dirname is movie_api/src/js
+app.use(express.static(path.join(__dirname, '../public')));
 // Listen for request
 app.listen(8080, () => {
     console.log('Your app is listening on port 8080');

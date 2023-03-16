@@ -1,24 +1,180 @@
 <!DOCUTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
     <title>
-        MyFlix
+        myFlix Documentation
     </title>
 </head>
 <body>
-<h1>myFlix Application</h1>
-<h2>Information</h2>
-<p>
-    This application will provide users with access to information about different
-    movies, directors, and genres or update their user information, for instance, their
-    list of “Favorite Movies. 
- </p>
- <p>   
-    myFlix Application is REST API that
-    can be accessed via commonly used HTTP methods like GET and POST. 
-    Similar methods (CRUD) can be used to retrieve data from database 
-    and store that data. This API provides movie information in JSON format. 
-</p>
+<div class="container">  
+  <h1>myFlix Application</h1>
+  <h2>Documentation</h2>
+  <p>   
+      myFlix Application is REST API that allow clients to access to information about different
+      movies, directors, and genres via commonly used HTTP methods like GET, POST, PUT and DELETE. 
+      The application allows clients to update their information, for instance, their
+      list of “Favorite Movies", usernames, passwords and emails. 
+  </p> 
+  <h3>URL Endpoints and Request Methods</h3>
+  <h4>Get all movies </h4>
+  <div class="flex-container">
+      <div class="item item-1">
+        <h4 class="center">URL</h4>
+        <p>/movies</p>
+      </div>
+      
+      <div class="item item-2">
+        <h4 class="center">Method</h4>
+        <p>GET</p>
+      </div>
+      
+      <div class="item item-3">
+        <h4 class="center">Request Body Format</h4>
+        <p class="center">None</p>
+      </div>
+      
+      <div class="item item-4">
+        <h4 class="center">Response Body Format</h4>
+        <p>A JSON Object holding data about all movies.</p>
+      </div>
+  </div>   
+  
+  <h4>Get description, genre, director, image URL of a single movie by title.</h4>
+  <div class="flex-container">
+      <div class="item item-1">
+        <h4 class="center">URL</h4>
+        <p>/movies/[title]</p>
+      </div>
+      
+      <div class="item item-2">
+        <h4 class="center">Method</h4>
+        <p>GET</p>
+      </div>
+      
+      <div class="item item-3">
+        <h4 class="center">Request Body Format</h4>
+        <p class="center">None</p>
+      </div>
+      
+      <div class="item item-4">
+        <h4 class="center">Response Body Format</h4>
+        <p>A JSON object holding data about a single movie containing ID, title, description, genre, director and image. Example :<br>
+          [<br>
+          id : 1,<br>
+          title : ‘Jurassic Park 2’<br>
+          description : “is based on the 1990 novel written by Michael Crichton. “,<br>
+          genre : {<br>
+                name: “action”,<br>
+                description : "fast-paced and include a lot of action like fight scenes, chase scenes."<br>
+            
+          }<br>
+          director : “Steven Spielberg”,<br>
+          birthyear : 1946,<br>
+          month: 12,<br>
+          date: 18,<br>
+          
+          bio: “Spielberge was born in Ohio and grew up in Arizona. He move to California and studied film in college."<br>
+          ]
+          
+          </p>
+      </div>
+  </div>  
+  
+  <h4></h4>
+  <div class="flex-container">
+      <div class="item item-1">
+        <h4 class="center">URL</h4>
+        <p></p>
+      </div>
+      
+      <div class="item item-2">
+        <h4 class="center">Method</h4>
+        <p></p>
+      </div>
+      
+      <div class="item item-3">
+        <h4 class="center">Request Body Format</h4>
+        <p></p>
+      </div>
+      
+      <div class="item item-4">
+        <h4 class="center">Response Body Format</h4>
+        <p></p>
+      </div>
+  </div>  
+</div>
 
+<h4></h4>
+  <div class="flex-container">
+      <div class="item item-1">
+        <h4 class="center">URL</h4>
+        <p></p>
+      </div>
+      
+      <div class="item item-2">
+        <h4 class="center">Method</h4>
+        <p></p>
+      </div>
+      
+      <div class="item item-3">
+        <h4 class="center">Request Body Format</h4>
+        <p></p>
+      </div>
+      
+      <div class="item item-4">
+        <h4 class="center">Response Body Format</h4>
+        <p></p>
+      </div>
+  </div>  
+</div>
+
+<h4></h4>
+  <div class="flex-container">
+      <div class="item item-1">
+        <h4 class="center">URL</h4>
+        <p></p>
+      </div>
+      
+      <div class="item item-2">
+        <h4 class="center">Method</h4>
+        <p></p>
+      </div>
+      
+      <div class="item item-3">
+        <h4 class="center">Request Body Format</h4>
+        <p></p>
+      </div>
+      
+      <div class="item item-4">
+        <h4 class="center">Response Body Format</h4>
+        <p></p>
+      </div>
+  </div>  
+</div>
+
+<h4></h4>
+  <div class="flex-container">
+      <div class="item item-1">
+        <h4 class="center">URL</h4>
+        <p></p>
+      </div>
+      
+      <div class="item item-2">
+        <h4 class="center">Method</h4>
+        <p></p>
+      </div>
+      
+      <div class="item item-3">
+        <h4 class="center">Request Body Format</h4>
+        <p></p>
+      </div>
+      
+      <div class="item item-4">
+        <h4 class="center">Response Body Format</h4>
+        <p></p>
+      </div>
+  </div>  
+</div>
 </body>
 </html>
