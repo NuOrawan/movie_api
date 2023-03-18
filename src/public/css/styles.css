@@ -1,6 +1,13 @@
 * {
     box-sizing: border-box;
   }
+  body {
+    font-family: Verdana, sans-serif;
+    font-size: ;
+  }
+  p { font-size: 1em; }
+  h1 { font-size: 1.5em; }
+  
   .container{
     width: 95%;
     
@@ -22,30 +29,44 @@
     width: 90%;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
     margin : 0 auto;
     justify-content: center;
     background-color: #D3D3D3;
-    bxorder: 1px solid red;
+    
    
   }
   .item {
-    padding: 2em;
-    border: 1px solid black;
+    padding: 1em;
+    bxorder: 1px solid black;
     align-self: flex-start;
   }
   .item-1 {
-    flex: 15%;
+    flex: 25%;
     text-align: center;
   }
   .item-2 {
-    flex: 10%;
+    flex: 25%;
     flex-shrink: 1;
     text-align: center;
   }
   .item-3 .item-4 {
-    flex-grow: 1;
-    flex: 30%;
     text-align: left;
+    flex: 1 0 auto; 
+  }
+  .key {
+    font-weight: bold;
+  }
+  .value {
+    color: green;
+  }
+  .indent {
+    padding-left: 3em;
+  }
+  .header{
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
   }
   
   /* On screens that are 992px wide or less, go from four columns to two columns */
@@ -58,5 +79,14 @@
   @media screen and (max-width: 600px) {
     .flex-container {
       flex-direction: column;
+    }
+    .item {
+      text-align: left;
+    }
+    .header{
+      text-align: left;
+    }
+    .center {
+      text-align: left;
     }
   }

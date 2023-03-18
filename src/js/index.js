@@ -30,10 +30,8 @@ let movies = [
         "director" : {
             "name" : "Chris Columbus",
             "bio" : "Chris Columbus is an American filmmaker. Born in Spangler, Pennsylvania, Columbus studied film at Tisch School of the Arts",
-            "bornyear" : 1958,
-            "month" : 9,
-            "date" : 10,
-            "deathyear" : ''
+            "dob" : 1958-9-10,
+            "deathyear" : " "
         },
         "imageURL" : "/img/harry_potter_and_the_philosopher_stone.jpeg"
     },
@@ -47,10 +45,8 @@ let movies = [
         "director" : {
             "name" : "Peter Jackson",
             "bio" : "Peter Jackson, in full Sir Peter Robert Jackson, (born October 31, 1961, Pukerua Bay, North Island, New Zealand), New Zealand director,",
-            "bornyear" : 1961,
-            "month" : 10,
-            "date" : 31,
-            "deathyear" : ''
+            "dob" : 1961-10-31,
+            "deathyear" : " "
         },
         "imageURL" : "/img/the_Lord_of_the_rings_the_return_of_the_king.jpeg"
     },
@@ -64,10 +60,8 @@ let movies = [
         "director" : {
             "name" : "Ridley Scott",
             "bio" : "Sir Ridley Scott (born 30 November 1937) is an English film director and producer. Best known for directing films in the science fiction and historical",
-            "bornyear" : 1937,
-            "month" : 11,
-            "date" : 30,
-            "deathyear" : ''
+            "dob" : 1937-11-30,
+            "deathyear" : " "
         },  
         "imageURL" : "/img/black_hawk_down.jpeg"
     },
@@ -81,10 +75,8 @@ let movies = [
         "director" : {
             "name" : "Frank Coraci",
             "bio" : "Frank Coraci (born February 3, 1966) is an American film director and screenwriter best known for his work with actor Adam Sandler.",
-            "bornyear" : 1966,
-            "month" : 2,
-            "date" : 3,
-            "deathyear" : ''
+            "dob" : 1966-2-3,
+            "deathyear" : " "
         },
         "imageURL" : "/img/blended.jpeg"
     },
@@ -98,10 +90,8 @@ let movies = [
         "director" : {
             "name" : "Denis Villeneuve",
             "bio" : "Denis Villeneuve is a Canadian filmmaker. He is a four-time recipient of the Canadian Screen Award (formerly Genie Award) for Best Direction",
-            "bornyear" : 1967,
-            "month" : 10,
-            "date" : 3,
-            "deathyear" : ''
+            "dob" : 1967-10-3,
+            "deathyear" : " "
         },
         "imageURL" : "/img/arrival.jpeg"
     }
