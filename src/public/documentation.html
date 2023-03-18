@@ -1,5 +1,5 @@
 <!DOCUTYPE html>
-<html lang="en">
+<html lang="en" id="top">
 <head>
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
     <title>
@@ -16,9 +16,20 @@
       The application allows clients to update their information, for instance, their
       list of “Favorite Movies", usernames, passwords and emails. 
   </p> 
-  <p>Date of birth of director is in ISO 8601 format.</p>
+  
   <h3>URL Endpoints and Request Methods</h3>
-  <h4>Get all movies </h4>
+  <ul>
+    <li><a href="#getAllMovies">Get a list of all movies</a></li>
+    <li><a href="#getAMovie">Get description, genre, director, image URL of a single movie by title.</a></li>
+    <li><a href="#getAGenre">Get data about a genre ‘s description by name.</a></li>
+    <li><a href="#getADirector">Get data about a director (bio, date of birth and death year) by name.</a></li>
+    <li><a href="#addNewUser">Add new user.</a></li>
+    <li><a href="#updateUser">Update user info by username.</a></li>
+    <li><a href="#addAMovie">Add a movie to user’s list of favorites.</a></li>
+    <li><a href="#removeAMovie">Remove a movie from a user’s list of favorite movies.</a></li>
+    <li><a href="#removeUser">Deregister/remove existing users.</a></li>
+  </ul>
+  <h4 id="getAllMovies">Get all movies </h4>
   <div class="flex-container">
       <div class="item item-1">
         <h4 class="header">URL</h4>
@@ -40,8 +51,8 @@
         <p>A JSON Object holding data about all movies.</p>
       </div>
   </div>   
-  
-  <h4>Get description, genre, director, image URL of a single movie by title.</h4>
+  <a class ="right" href="#top">top</a>
+  <h4 id="getAMovie">Get description, genre, director, image URL of a single movie by title.</h4>
   <div class="flex-container">
       <div class="item item-1">
         <h4 class="header">URL</h4>
@@ -60,29 +71,28 @@
       
       <div class="item item-4">
         <h4 class="header">Response Body Format</h4>
-        <p>A JSON object holding data about a single movie containing ID, title, description, genre, director and image. Example :<br>
-          [<br>
-            <span class ="key">id :</span><span class="value">1,</span> <br>
-            <span class ="key">title :</span><span class="value"> "Jurassic Park 2"</span><br>
-            <span class ="key">description :</span> <span class="value">“is based on the 1990 novel written by Michael Crichton. “,</span><br>
-            <span class ="key">genre : </span>{<br>
-              <span class="key indent">name :</span><span class="value">“action”,</span><br>
-              <span class="key indent">description :</span><span class="value">"fast-paced and include a lot of action like fight scenes, chase scenes."</span>  <br>
-              }<br>
-              <span class ="key">director :</span> {<br>
-              <span class="key indent">  name : </span><span class="value">“Steven Spielberg”,</span><br>
-              <span class="key indent">  dob : </span><span class="value">1946-12-18,</span><br>
-              <span class="key indent">  deathyear :</span>,<br>
-              <span class="key indent">  bio : </span><span class="value">“Spielberge was born in Ohio and grew up in Arizona. He move to California and studied film in college."</span><br>
-              <span class ="key">imageURL : </span><span class="value"><a href="http://">"/img/jurassic_park_2.jpeg"</a></span>
-            }<br>
-          ]<br>   
-          
+        <p>A JSON object holding data about a single movie containing ID, title, description, genre, director and image URL. Example :<br>
+          {<br>
+            <span class ="indent key">id :</span><span class="value">1,</span> <br>
+            <span class ="indent key">title :</span><span class="value"> "Jurassic Park 2"</span><br>
+            <span class ="indent key">description :</span> <span class="value">“is based on the 1990 novel written by Michael Crichton. “,</span><br>
+            <span class ="indent key">genre : </span>{<br>
+              <span class="key indentDouble">name :</span><span class="value">“action”,</span><br>
+              <span class="key indentDouble">description :</span><span class="value">"fast-paced and include a lot of action like fight scenes, chase scenes."</span>  <br>
+              <span class="indent">}</span><br>
+              <span class ="indent key">director :</span> {<br>
+              <span class="key indentDouble">  name : </span><span class="value">“Steven Spielberg”,</span><br>
+              <span class="key indentDouble">  dob : </span><span class="value">"1946-12-18",</span><br>
+              <span class="key indentDouble">  deathyear :</span>,<br>
+              <span class="key indentDouble">  bio : </span><span class="value">“Spielberge was born in Ohio and grew up in Arizona. He move to California and studied film in college."</span><br>
+              <span class="indent">}</span><br>
+              <span class ="indent key">imageURL : </span><span class="value"><a href="http://img/jurasssic_park_2.jpeg">"/img/jurassic_park_2.jpeg"</a></span><br>
+          }<br>  
           </p>
       </div>
-  </div>  
-  
-  <h4>Get data about a genre ‘s description by name.</h4>
+   </div>  
+  <a class ="right" href="#top">top</a>
+  <h4 id="getAGenre">Get data about a genre ‘s description by name.</h4>
   <div class="flex-container">
       <div class="item item-1">
         <h4 class="header">URL</h4>
@@ -102,18 +112,17 @@
       <div class="item item-4">
         <h4 class="header">Response Body Format</h4>
         <p>A JSON Object holding about a genre. Example :<br>
-          [<br>
+          
           <span class ="key">genre</span> {<br>
             <span class="key indent"> name :  </span><span class="value">"science fiction" </span>,<br>
             <span class="key indent"> description: </span><span class="value">"A genre characterized by stories involving conflicts between science and technology, human nature."</span><br> 
           }<br>
-          ] <br>
+          
           </p>
       </div>
-  </div>  
 </div>
-
-<h4>Get data about a director (bio, date of birth and death year) by name.</h4>
+<a class ="right" href="#top">top</a>
+<h4 id="getADirector">Get data about a director (bio, date of birth and death year) by name.</h4>
   <div class="flex-container">
       <div class="item item-1">
         <h4 class="center">URL</h4>
@@ -139,12 +148,12 @@
           <span class="key indent">  deathyear :</span>,<br>
           <span class="key indent">  bio : </span><span class="value">“Spielberge was born in Ohio and grew up in Arizona. He move to California and studied film in college."</span><br>
             }<br>
-          ]<br>   
+             
         </p>
       </div>
   </div>  
-</div>
-<h4>Add new user.</h4>
+<a class ="right" href="#top">top</a>
+<h4 id="addNewUser">Add new user.</h4>
   <div class="flex-container">
       <div class="item item-1">
         <h4 class="header">URL</h4>
@@ -159,36 +168,33 @@
       <div class="item item-3">
         <h4 class="header">Request Body Format</h4>
         <p>A JSON object holding data about a new user to be added. Example :<br>
-          [<br>
-          <span class ="key">name : </span><span class="value">“Paula Gormez”,</span><br>
-          <span class ="key">username : </span><span class="value">“plgormez”,</span><br>
-          <span class ="key">password : </span><span class="value">“PL$2023mz”,</span><br>
-          <span class ="key">email : </span><span class="value">“pgormez@gmail.com”,</span><br>
-          <span class ="key">favoriteMovies : </span><span class="value">[“Babylon”]</span><br> 
-          ]<br>
-          
+          {<br>
+          <span class ="indent key">name : </span><span class="value">“Paula Gormez”,</span><br>
+          <span class ="indent key">username : </span><span class="value">“plgormez”,</span><br>
+          <span class ="indent key">password : </span><span class="value">“PL$2023mz”,</span><br>
+          <span class ="indent key">email : </span><span class="value">“pgormez@gmail.com”,</span><br>
+          <span class ="indent key">favoriteMovies : </span><span class="value">[“Babylon”]</span><br> 
+          }<br>
           </p>
       </div>
       
       <div class="item item-4">
         <h4 class="header">Response Body Format</h4>
-       <p>A JSON object holding data about a new user that was added including id. Example :<br>
-        [<br>
-        <span class ="key">id :</span><span class="value">1,</span><br> 
-        <span class ="key">name : </span><span class="value">“Paula Gormez”,</span><br>
-        <span class ="key">username : </span><span class="value">“plgormez”,</span><br>
-        <span class ="key">password : </span><span class="value">“PL$2023mz”,</span><br>
-        <span class ="key">email : </span><span class="value">“pgormez@gmail.com”,</span><br>
-        <span class ="key">favoriteMovies : </span><span class="value">[“Babylon”]</span><br> 
-        ]<br>
-        
-
+        <p>A JSON object holding data about a new user that was added including id. Example :<br>
+        {<br>
+        <span class ="indent key">id :</span><span class="value">1,</span><br> 
+        <span class ="indent key">name : </span><span class="value">“Paula Gormez”,</span><br>
+        <span class ="indent key">username : </span><span class="value">“plgormez”,</span><br>
+        <span class ="indent key">password : </span><span class="value">“PL$2023mz”,</span><br>
+        <span class ="indent key">email : </span><span class="value">“pgormez@gmail.com”,</span><br>
+        <span class ="indent key">favoriteMovies : </span><span class="value">{“Babylon”}</span><br> 
+        }<br>
        </p>
       </div>
-  </div>  
-</div>
+  </div> 
 
-<h4>Update user info. by username.</h4>
+<a class ="right" href="#top">top</a>
+<h4 id="updateUser">Update user info. by username.</h4>
   <div class="flex-container">
       <div class="item item-1">
         <h4 class="header">URL</h4>
@@ -210,8 +216,9 @@
         <p>A text message indicating whether username has been updated successfully.</p>
       </div>
   </div>  
-</div>
-<h4>Add a movie to user’s list of favorites </h4>
+
+<a class ="right" href="#top">top</a>
+<h4 id="addAMovie">Add a movie to user’s list of favorites </h4>
   <div class="flex-container">
       <div class="item item-1">
         <h4 class="header">URL</h4>
@@ -225,14 +232,8 @@
       
       <div class="item item-3">
         <h4 class="header">Request Body Format</h4>
-        <p>A JSON object holding data about a  user’s favorite movies. Example :<br>
-          [<br>
-          <span class ="key">favoriteMovies :</span> [<br>
-          <span class="value">“Hustle”,</span><br> 
-          <span class="value">“Top Gun Maverick”,</span><br> 
-            <span class="value">“Ambulance”</span><br> 
-          ]<br>
-          </p>
+        <p class="center">NONE
+        </p>
       </div>
       
       <div class="item item-4">
@@ -240,8 +241,9 @@
         <p>A text message indicating whether a movie has been added successfully.</p>
       </div>
   </div>  
-</div>
-<h4>Remove a movie from a user’s list of favorite movies.</h4>
+
+<a class ="right" href="#top">top</a>
+<h4 id="removeAMovie">Remove a movie from a user’s list of favorite movies.</h4>
   <div class="flex-container">
       <div class="item item-1">
         <h4 class="header">URL</h4>
@@ -255,10 +257,7 @@
       
       <div class="item item-3">
         <h4 class="header">Request Body Format</h4>
-        <p>A JSON object holding data about a  user’s  movies to be removed. Example :<br>
-          <span class ="key">favoriteMovies :</span> [<br>
-          <span class="value">“Hustle”,</span><br> 
-          ]<br>
+        <p class="center">NONE
         </p>
       </div>
       
@@ -267,8 +266,9 @@
         <p>A text message indicating whether a movie has been removed successfully.</p>
       </div>
   </div>  
-</div>
-<h4>Deregister/remove existing users.</h4>
+
+<a class ="right" href="#top">top</a>
+<h4 id="removeUser">Deregister/remove existing users.</h4>
   <div class="flex-container">
       <div class="item item-1">
         <h4 class="header">URL</h4>
@@ -290,29 +290,8 @@
         <p>A text message indicating whether user’s email has been removed successfully.</p>
       </div>
   </div>  
-</div>
-<h4></h4>
-  <div class="flex-container">
-      <div class="item item-1">
-        <h4 class="header">URL</h4>
-        <p></p>
-      </div>
-      
-      <div class="item item-2">
-        <h4 class="header">Method</h4>
-        <p></p>
-      </div>
-      
-      <div class="item item-3">
-        <h4 class="header">Request Body Format</h4>
-        <p></p>
-      </div>
-      
-      <div class="item item-4">
-        <h4 class="header">Response Body Format</h4>
-        <p></p>
-      </div>
-  </div>  
+
+  <a class ="right" href="#top">top</a>
 </div>
 </body>
 </html>
