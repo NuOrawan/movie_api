@@ -20,9 +20,9 @@
   <h3>URL Endpoints and Request Methods</h3>
   <ul>
     <li><a href="#getAllMovies">Get a list of all movies</a></li>
-    <li><a href="#getAMovie">Get description, genre, director, image URL of a single movie by title.</a></li>
+    <li><a href="#getAMovie">Get description, genre, director, featured or not, image URL of a single movie by title.</a></li>
     <li><a href="#getAGenre">Get data about a genre ‘s description by name.</a></li>
-    <li><a href="#getADirector">Get data about a director (bio, date of birth and death year) by name.</a></li>
+    <li><a href="#getADirector">Get data about a director (bio, birth and death year) by name.</a></li>
     <li><a href="#addNewUser">Add new user.</a></li>
     <li><a href="#updateUser">Update user info by username.</a></li>
     <li><a href="#addAMovie">Add a movie to user’s list of favorites.</a></li>
@@ -73,20 +73,21 @@
         <h4 class="header">Response Body Format</h4>
         <p>A JSON object holding data about a single movie containing ID, title, description, genre, director and image URL. Example :<br>
           {<br>
-            <span class ="indent key">id :</span><span class="value">1,</span> <br>
-            <span class ="indent key">title :</span><span class="value"> "Jurassic Park 2"</span><br>
-            <span class ="indent key">description :</span> <span class="value">“is based on the 1990 novel written by Michael Crichton. “,</span><br>
-            <span class ="indent key">genre : </span>{<br>
-              <span class="key indentDouble">name :</span><span class="value">“action”,</span><br>
-              <span class="key indentDouble">description :</span><span class="value">"fast-paced and include a lot of action like fight scenes, chase scenes."</span>  <br>
+            <span class ="indent key">ObjectId :</span><span class="value">"641f2c3d67f7cf6cd5fb4a00",</span> <br>
+            <span class ="indent key">Title :</span><span class="value"> "Jurassic Park 2"</span><br>
+            <span class ="indent key">Description :</span> <span class="value">“is based on the 1990 novel written by Michael Crichton. “,</span><br>
+            <span class ="indent key">Genre : </span>{<br>
+              <span class="key indentDouble">Name :</span><span class="value">“action”,</span><br>
+              <span class="key indentDouble">Description :</span><span class="value">"fast-paced and include a lot of action like fight scenes, chase scenes."</span>  <br>
               <span class="indent">}</span><br>
-              <span class ="indent key">director :</span> {<br>
-              <span class="key indentDouble">  name : </span><span class="value">“Steven Spielberg”,</span><br>
-              <span class="key indentDouble">  dob : </span><span class="value">"1946-12-18",</span><br>
-              <span class="key indentDouble">  deathyear :</span>,<br>
-              <span class="key indentDouble">  bio : </span><span class="value">“Spielberge was born in Ohio and grew up in Arizona. He move to California and studied film in college."</span><br>
-              <span class="indent">}</span><br>
-              <span class ="indent key">imageURL : </span><span class="value"><a href="http://img/jurasssic_park_2.jpeg">"/img/jurassic_park_2.jpeg"</a></span><br>
+              <span class ="indent key">Director :</span> {<br>
+              <span class="key indentDouble">  Name : </span><span class="value">“Steven Spielberg”,</span><br>
+              <span class="key indentDouble">  Bio : </span><span class="value">“Spielberge was born in Ohio and grew up in Arizona. He move to California and studied film in college."</span><br>
+               <span class="key indentDouble">  Birth : </span><span class="value">"1946",</span><br>
+              <span class="key indentDouble">  Death :</span>" "<br>
+              <span class ="indent key"></span> }<br>
+              <span class ="indent key">Featured : </span><span class="value">False</span><br>
+              <span class ="indent key">imageURL : </span><span class="value"><a href="http://img/jurasssic_park_2.jpeg">"http://img/jurassic_park_2.jpeg"</a></span><br>
           }<br>  
           </p>
       </div>
@@ -113,16 +114,16 @@
         <h4 class="header">Response Body Format</h4>
         <p>A JSON Object holding about a genre. Example :<br>
           
-          <span class ="key">genre</span> {<br>
-            <span class="key indent"> name :  </span><span class="value">"science fiction" </span>,<br>
-            <span class="key indent"> description: </span><span class="value">"A genre characterized by stories involving conflicts between science and technology, human nature."</span><br> 
+          <span class ="key">Genre</span> {<br>
+            <span class="key indent"> Name :  </span><span class="value">"science fiction" </span>,<br>
+            <span class="key indent"> Description: </span><span class="value">"A genre characterized by stories involving conflicts between science and technology, human nature."</span><br> 
           }<br>
           
           </p>
       </div>
 </div>
 <a class ="right" href="#top">top</a>
-<h4 id="getADirector">Get data about a director (bio, date of birth and death year) by name.</h4>
+<h4 id="getADirector">Get data about a director (bio, birth and death year) by name.</h4>
   <div class="flex-container">
       <div class="item item-1">
         <h4 class="center">URL</h4>
@@ -142,11 +143,12 @@
       <div class="item item-4">
         <h4 class="center">Response Body Format</h4>
         <p>A JSON object holding data about a director. Example :<br>
-          <span class ="key">director :</span> {<br>
-          <span class="key indent">  name : </span><span class="value">“Steven Spielberg”,</span><br>
-          <span class="key indent">  dob : </span><span class="value">1946-12-18,</span><br>
-          <span class="key indent">  deathyear :</span>,<br>
-          <span class="key indent">  bio : </span><span class="value">“Spielberge was born in Ohio and grew up in Arizona. He move to California and studied film in college."</span><br>
+          <span class ="key">Director :</span> {<br>
+          <span class="key indent">  Name : </span><span class="value">“Steven Spielberg”,</span><br>
+          <span class="key indent">  Bio : </span><span class="value">“Spielberge was born in Ohio and grew up in Arizona. He move to California and studied film in college.",</span><br>
+          <span class="key indent">  Birth : </span><span class="value">"1946",</span><br>
+          <span class="key indent">  Death :</span> " "<br>
+          
             }<br>
              
         </p>
@@ -169,11 +171,13 @@
         <h4 class="header">Request Body Format</h4>
         <p>A JSON object holding data about a new user to be added. Example :<br>
           {<br>
-          <span class ="indent key">name : </span><span class="value">“Paula Gormez”,</span><br>
-          <span class ="indent key">username : </span><span class="value">“plgormez”,</span><br>
-          <span class ="indent key">password : </span><span class="value">“PL$2023mz”,</span><br>
-          <span class ="indent key">email : </span><span class="value">“pgormez@gmail.com”,</span><br>
-          <span class ="indent key">favoriteMovies : </span><span class="value">[“Babylon”]</span><br> 
+         
+          <span class ="indent key">Username : </span><span class="value">“plgormez”,</span><br>
+          <span class ="indent key">Password : </span><span class="value">“PL$2023mz”,</span><br>
+          <span class ="indent key">Email : </span><span class="value">“pgormez@gmail.com”,</span><br>
+          <span class ="indent key">Birthday : </span><span class="value">“1988/10/02”,</span><br>  
+          <span class ="indent key">favoriteMovies : </span><span class="value">{“Babylon”}</span><br> 
+          
           }<br>
           </p>
       </div>
@@ -183,11 +187,10 @@
         <p>A JSON object holding data about a new user that was added including id. Example :<br>
         {<br>
         <span class ="indent key">id :</span><span class="value">1,</span><br> 
-        <span class ="indent key">name : </span><span class="value">“Paula Gormez”,</span><br>
         <span class ="indent key">username : </span><span class="value">“plgormez”,</span><br>
         <span class ="indent key">password : </span><span class="value">“PL$2023mz”,</span><br>
         <span class ="indent key">email : </span><span class="value">“pgormez@gmail.com”,</span><br>
-        <span class ="indent key">favoriteMovies : </span><span class="value">{“Babylon”}</span><br> 
+        <span class ="indent key">FavoriteMovies : </span><span class="value">[“641f2c3d67f7cf6cd5fb4a00”]</span><br> 
         }<br>
        </p>
       </div>
