@@ -1,3 +1,12 @@
+// Integrate mongoose with API
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+// Define model names
+const Movies = Models.Movie;
+const Users = Models.User;
+// Connect to database
+mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
+
 const express = require('express'),
     bodyParser = require('body-parser'),
    uuid    = require('uuid');      
@@ -5,97 +14,7 @@ let path = require('path');
 const app = express();
 
 app.use(bodyParser.json());
-// List of users
-let users = [
-    {
-        "id" : 1,
-        "name" : "Ann Marie",
-        "username" : "annm2023",
-        "password" : "marA0312",
-        "email" : "ann_marie@gmail.com",
-        "favoritemovies" : []
 
-    } 
-]
-// List of movies including description, genre, director, image URL
-let movies = [
-    {   
-        "title" : "Harry Potter and the Sorcerer\'s Stone",
-        "description" : "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world",
-        "genre" : { 
-            "name" : "fantasy adventure",
-            "description" : "Fantasy adventure are films with fantastic themes, usually involving magic, supernatural events, make-believe creatures, or exotic fantasy worlds."
-            
-        },
-        "director" : {
-            "name" : "Chris Columbus",
-            "bio" : "Chris Columbus is an American filmmaker. Born in Spangler, Pennsylvania, Columbus studied film at Tisch School of the Arts",
-            "dob" : "1958-9-10",
-            "deathyear" : " "
-        },
-        "imageURL" : "/img/harry_potter_and_the_philosopher_stone.jpeg"
-    },
-    {   
-        "title" : "Lord of the Rings:The Return of the King",
-        "description" : "is a 2003 epic fantasy adventure film directed by Peter Jackson from a screenplay by Fran Walsh.",
-        "genre" : {
-            "name" : "fantasy adventure",
-            "description" : "Fantasy adventure are films with fantastic themes, usually involving magic, supernatural events, make-believe creatures, or exotic fantasy worlds."
-        },
-        "director" : {
-            "name" : "Peter Jackson",
-            "bio" : "Peter Jackson, in full Sir Peter Robert Jackson, (born October 31, 1961, Pukerua Bay, North Island, New Zealand), New Zealand director,",
-            "dob" : "1961-10-31",
-            "deathyear" : " "
-        },
-        "imageURL" : "/img/the_Lord_of_the_rings_the_return_of_the_king.jpeg"
-    },
-    {  
-        "title" : 'Black Hawk Down',
-        "description" : "Black Hawk Down is a 2001 war film directed and produced by Ridley Scott, and co-produced by Jerry Bruckheimer, from a screenplay by Ken Nolan.",
-        "genre" : {
-            "name" : "action",
-            "description" : "fast-paced and include a lot of action like fight scenes, chase scenes, and slow-motion shots. They can feature superheroes, martial arts, or exciting stunts. These high-octane films are more about the execution of the plot rather than the plot itself."
-        },  
-        "director" : {
-            "name" : "Ridley Scott",
-            "bio" : "Sir Ridley Scott (born 30 November 1937) is an English film director and producer. Best known for directing films in the science fiction and historical",
-            "dob" : "1937-11-30",
-            "deathyear" : " "
-        },  
-        "imageURL" : "/img/black_hawk_down.jpeg"
-    },
-    {   
-        "title" : "Blended",
-        "description" : "After a bad blind date, a man and woman find themselves stuck together at a resort for families, where their attraction grows as their respective kids.",
-        "genre" : {
-            "name" : "romantic comedy",
-            "description" : "a subgenre of comedy and slice of life fiction, focusing on lighthearted, humorous plot lines centered on romantic ideas, such as how true love is able to surmount most obstacles."
-        },
-        "director" : {
-            "name" : "Frank Coraci",
-            "bio" : "Frank Coraci (born February 3, 1966) is an American film director and screenwriter best known for his work with actor Adam Sandler.",
-            "dob" : "1966-2-3",
-            "deathyear" : " "
-        },
-        "imageURL" : "/img/blended.jpeg"
-    },
-    {   
-        "title" : "Arrival",
-        "description" : "A linguist works with the military to communicate with alien lifeforms after twelve mysterious spacecrafts appear around the world.",
-        "genre" : {
-            "name" :"science fiction",
-            "description" : "A genre characterized by stories involving conflicts between science and technology, human nature, and social organization in futuristic or fantastical settings, created in cinema through distinctive iconographies, images, and sounds often produced by means of special effects technology."
-        },    
-        "director" : {
-            "name" : "Denis Villeneuve",
-            "bio" : "Denis Villeneuve is a Canadian filmmaker. He is a four-time recipient of the Canadian Screen Award (formerly Genie Award) for Best Direction",
-            "dob" : "1967-10-3",
-            "deathyear" : " "
-        },
-        "imageURL" : "/img/arrival.jpeg"
-    }
-]
 // Return welcome message
 app.get('/', (req, res) =>{
     res.send('Welcome to myFlix');
@@ -140,9 +59,40 @@ app.get('/movies/directors/:directorName', (req,res)=>{
 
     }
 });
-// Add a new user.
+// Add a new user. Successful POST request returning data of the new user and a message that the user was sucessfully added.
+/* Expected JSON format in a request
+{
+  ID: Integer,
+  Username: String,
+  Password: String,
+  Email: String,
+  Birthday: Date
+}*/
 app.post('/users',(req,res) =>{
-    res.send('Successful POST request returning data of the new user and a message that the user was sucessfully added');
+    Users.findOne({Username : req.body.Username})
+    .then((user) => {
+        // If user already exists.
+        if(user){
+            return res.status(400).send(req.body.Username + 'already exists.');
+        } else {
+            Users
+                .create({
+                    Username : req.body.Username,
+                    Password : req.body.Password,
+                    Email : req.body.Email,
+                    Birthday : req.body.Birthday
+                }).then((user) => {res.status(201).json(user)})
+                .catch((error) => {
+                    console.error(error);
+                    res.status(500).send('Error : ' + error);
+                })
+        }
+    })
+    .catch((error) => {
+        console.error(error);
+        res.status(500).send('Error : ' + error );
+    });
+    
 });
 
 // Update their user info (username).
