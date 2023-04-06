@@ -5,7 +5,7 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 // Connect to database
-mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost:27017/cfDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
 const express = require('express'),
     bodyParser = require('body-parser'),
@@ -77,11 +77,12 @@ app.post('/users',(req,res) =>{
         } else {
             Users
                 .create({
+                    
                     Username : req.body.Username,
                     Password : req.body.Password,
                     Email : req.body.Email,
                     Birthday : req.body.Birthday
-                }).then((user) => {res.status(201).json(user)})
+                }).then((user) => {res.status(201).json(user)}) //New document named user
                 .catch((error) => {
                     console.error(error);
                     res.status(500).send('Error : ' + error);
