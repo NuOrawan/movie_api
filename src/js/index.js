@@ -81,25 +81,7 @@ app.put('/users/:Username', (req, res) => {
       res.status(500).send('Error: ' + error);
   });
 });
-/* Add a movie to a user's list of favorites
-app.post('/users/:Username/Movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username })
-  .then((user)=>{
-    if(!user){
-      res.status(400).send(req.params.Username + "does not exist.");
-    } else {
-      user.updateOne(
-        { $push: { FavoriteMovies : req.params.MovieID } },
-        {new : true}
-      )
-      console.log("User's favorite movie was Updated");
-      res.json(user);
-      }
-  }).catch((error)=>{
-      console.error(error);
-      res.status(500).send('Error' + error);
-  }); 
-});*/
+
 // Update a user's info, by username using call back function
 /* We’ll expect JSON in this format
 {
@@ -131,7 +113,26 @@ app.post('/users/:Username/Movies/:MovieID', (req, res) => {
 //     });
     
   // });
-// Add a movie to user's list of favorites
+ /* Add a movie to a user's list of favorites using Promise
+app.post('/users/:Username/Movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username })
+  .then((user)=>{
+    if(!user){
+      res.status(400).send(req.params.Username + "does not exist.");
+    } else {
+      user.updateOne(
+        { $push: { FavoriteMovies : req.params.MovieID } },
+        {new : true}
+      )
+      console.log("User's favorite movie was Updated");
+      res.json(user);
+      }
+  }).catch((error)=>{
+      console.error(error);
+      res.status(500).send('Error' + error);
+  }); 
+});*/ 
+// Add a movie to user's list of favorites using call back
 app.post('/users/:Username/Movies/:MovieID', (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
      $push: { FavoriteMovies: req.params.MovieID }
