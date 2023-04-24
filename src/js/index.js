@@ -133,20 +133,34 @@ app.post('/users/:Username/Movies/:MovieID', (req, res) => {
   }); 
 });*/ 
 // Add a movie to user's list of favorites using call back
-app.post('/users/:Username/Movies/:MovieID', (req, res) => {
+app.post('/users/:Username/movies/:MovieID', (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
      $push: { FavoriteMovies: req.params.MovieID }
    },
    { new: true }, // This line makes sure that the updated document is returned
   (err, updatedUser) => {
-    if(err){
+    if (err) {
       console.error(err);
-      res.status(500).send('Error : ' + err);
+      res.status(500).send('Error: ' + err);
     } else {
       res.json(updatedUser);
     }
   });
 });
+/*Update a user's info, by username using promise method
+app.post('/users2/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username })
+  .then((user)=>{
+    user.updateOne(
+      { $push: { FavoriteMovies: req.params.MovieID }},
+      { new: true }
+  );
+      res.json(user);
+  }).catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+  });
+});*/
 // Send static file ie. public/documentation.html Currently __dirname is movie_api/src/js
 app.use(express.static(path.join(__dirname, '../public')));
 // Listen for request
