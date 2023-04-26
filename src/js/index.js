@@ -38,7 +38,6 @@ app.post('/users',(req,res) =>{
         } else {
             Users
                 .create({
-                    
                     Username : req.body.Username,
                     Password : req.body.Password,
                     Email : req.body.Email,
@@ -67,22 +66,7 @@ app.get('/users/:Username', (req,res) =>{
     });
 });
 
-//Update a user's info, by username using promise method
-app.put('/users/:Username', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username })
-  .then((user)=>{
-      user.Username = req.body.Username;
-      user.Password = req.body.Password;
-      user.Email = req.body.Email;
-      user.Birthday = req.body.Birthday;
-      res.json(user);
-  }).catch((error) => {
-      console.error(error);
-      res.status(500).send('Error: ' + error);
-  });
-});
-
-// Update a user's info, by username using call back function
+// Update a user's info, by username using promise function
 /* We’ll expect JSON in this format
 {
   Username: String,
@@ -93,74 +77,65 @@ app.put('/users/:Username', (req, res) => {
   (required)
   Birthday: Date
 }*/
-// app.put('/users/:Username', (req, res) => {
-//     Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
-//       {
-//         Username: req.body.Username,
-//         Password: req.body.Password,
-//         Email: req.body.Email,
-//         Birthday: req.body.Birthday
-//       }
-//     },
-//     { new: true }, // This line makes sure that the updated document is returned
-//     (err, updatedUser) => {
-//       if(err) {
-//         console.error(err);
-//         res.status(500).send('Error: ' + err);
-//       } else {
-//         res.json(updatedUser);
-//       }
-//     });
-    
-  // });
- /* Add a movie to a user's list of favorites using Promise
-app.post('/users/:Username/Movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username })
-  .then((user)=>{
-    if(!user){
-      res.status(400).send(req.params.Username + "does not exist.");
-    } else {
-      user.updateOne(
-        { $push: { FavoriteMovies : req.params.MovieID } },
-        {new : true}
-      )
-      console.log("User's favorite movie was Updated");
-      res.json(user);
-      }
-  }).catch((error)=>{
-      console.error(error);
-      res.status(500).send('Error' + error);
-  }); 
-});*/ 
+app.put('/users/:Username', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, 
+    { $set:
+      {
+         Username: req.body.Username,
+         Password: req.body.Password,
+         Email: req.body.Email,
+         Birthday: req.body.Birthday
+       }
+    },
+    { new: true }) // This line makes sure that the updated document is returned
+  .then((updatedUser) => {
+       if(!updatedUser) {
+          res.status(404).send('User is not found.');         
+         
+        } else {
+         res.json(updatedUser);
+        }
+        })
+  .catch((error) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });         
+});  
+ 
 // Add a movie to user's list of favorites using call back
 app.post('/users/:Username/movies/:MovieID', (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
-     $push: { FavoriteMovies: req.params.MovieID }
+     $addToSet: { FavoriteMovies: req.params.MovieID }
    },
-   { new: true }, // This line makes sure that the updated document is returned
-  (err, updatedUser) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    } else {
-      res.json(updatedUser);
-    }
+   { new: true }) // This line makes sure that the updated document is returned
+  .then((updatedUser) => {
+      if(!updatedUser){
+        return res.status(404).send('User is not found.');
+      } else {
+        res.json(updatedUser);
+      }
+  })
+  .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error' + error);
+  }); 
+});
+// Delete a user by username
+app.delete('/users/:Username', (req, res) =>{
+  Users.findOneAndRemove({Username: req.params.Username})
+  .then((user) => {
+      if(!user){
+        return res.status(404).send('User is not found');
+      } else {
+        res.status(200).send('User was deleted.');
+      }
+  })
+  .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error' + error);
   });
 });
-/*Update a user's info, by username using promise method
-app.post('/users2/:Username/movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username })
-  .then((user)=>{
-    user.updateOne(
-      { $push: { FavoriteMovies: req.params.MovieID }},
-      { new: true }
-  );
-      res.json(user);
-  }).catch((error) => {
-      console.error(error);
-      res.status(500).send('Error: ' + error);
-  });
-});*/
+
 // Send static file ie. public/documentation.html Currently __dirname is movie_api/src/js
 app.use(express.static(path.join(__dirname, '../public')));
 // Listen for request
