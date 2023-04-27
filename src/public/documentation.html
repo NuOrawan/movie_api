@@ -175,7 +175,7 @@
           <span class ="indent key">Username : </span><span class="value">“plgormez”,</span><br>
           <span class ="indent key">Password : </span><span class="value">“PL$2023mz”,</span><br>
           <span class ="indent key">Email : </span><span class="value">“pgormez@gmail.com”,</span><br>
-          <span class ="indent key">Birthday : </span><span class="value">“1988/10/02”,</span><br>  
+          <span class ="indent key">Birthday : </span><span class="value">“02/10/1988”,</span><br>  
           <span class ="indent key">favoriteMovies : </span><span class="value">{“Babylon”}</span><br> 
           
           }<br>
@@ -186,7 +186,6 @@
         <h4 class="header">Response Body Format</h4>
         <p>A JSON object holding data about a new user that was added including id. Example :<br>
         {<br>
-        <span class ="indent key">id :</span><span class="value">1,</span><br> 
         <span class ="indent key">username : </span><span class="value">“plgormez”,</span><br>
         <span class ="indent key">password : </span><span class="value">“PL$2023mz”,</span><br>
         <span class ="indent key">email : </span><span class="value">“pgormez@gmail.com”,</span><br>
@@ -211,12 +210,32 @@
       
       <div class="item item-3">
         <h4 class="header">Request Body Format</h4>
-        <p class="center">NONE</p>
+        <p>A JSON object holding data about a new user to be updated. Example :<br>
+          {<br>
+         
+          <span class ="indent key">Username : </span><span class="value">“plgormez”,</span><br>
+          <span class ="indent key">Password : </span><span class="value">“PL$mz123”,</span><br>
+          <span class ="indent key">Email : </span><span class="value">“pgormez@gmail.com”,</span><br>
+          <span class ="indent key">Birthday : </span><span class="value">“02/10/1988”,</span><br>  
+          <span class ="indent key">FavoriteMovies: </span>
+          <span class="value">["641f2b2367f7cf6cd5fb49ff",
+        "641f2de267f7cf6cd5fb4a01"]</span>
+          }<br>
+          </p>
       </div>
       
       <div class="item item-4">
         <h4 class="header">Response Body Format</h4>
-        <p>A text message indicating whether username has been updated successfully.</p>
+        <p>A JSON object holding data about updated user. Example :<br>
+          {<br>
+            <span class ="indent key">_id : </span><span class="value">“6421ecb067f7cf6cd5fb4a07”,</span><br>
+          <span class ="indent key">Username : </span><span class="value">“plgormez”,</span><br>
+          <span class ="indent key">Username : </span><span class="value">“plgormez”,</span><br>
+          <span class ="indent key">Password : </span><span class="value">“PL$mz123”,</span><br>
+          <span class ="indent key">Email : </span><span class="value">“pgormez@gmail.com”,</span><br>
+          <span class ="indent key">Birthday : </span><span class="value">“02/10/1988”,</span><br>  
+          }<br>
+          </p>
       </div>
   </div>  
 
