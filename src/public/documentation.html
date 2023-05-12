@@ -24,7 +24,7 @@
     <li><a href="#getAGenre">Get data about a genre ‘s description by name.</a></li>
     <li><a href="#getADirector">Get data about a director (bio, birth and death year) by name.</a></li>
     <li><a href="#addNewUser">Add new user.</a></li>
-    <li><a href="#updateUser">Update user info by username.</a></li>
+    <li><a href="#updateUser">Update user info. (username, password, email, date of birth) by username.</a></li>
     <li><a href="#addAMovie">Add a movie to user’s list of favorites.</a></li>
     <li><a href="#removeAMovie">Remove a movie from a user’s list of favorite movies.</a></li>
     <li><a href="#removeUser">Deregister/remove existing users.</a></li>
@@ -52,7 +52,7 @@
       </div>
   </div>   
   <a class ="right" href="#top">top</a>
-  <h4 id="getAMovie">Get description, genre, director, image URL of a single movie by title.</h4>
+  <h4 id="getAMovie">Get description, genre, director, image URL of a movie by title.</h4>
   <div class="flex-container">
       <div class="item item-1">
         <h4 class="header">URL</h4>
@@ -73,21 +73,21 @@
         <h4 class="header">Response Body Format</h4>
         <p>A JSON object holding data about a single movie containing ID, title, description, genre, director and image URL. Example :<br>
           {<br>
-            <span class ="indent key">ObjectId :</span><span class="value">"641f2c3d67f7cf6cd5fb4a00",</span> <br>
-            <span class ="indent key">Title :</span><span class="value"> "Jurassic Park 2"</span><br>
-            <span class ="indent key">Description :</span> <span class="value">“is based on the 1990 novel written by Michael Crichton. “,</span><br>
             <span class ="indent key">Genre : </span>{<br>
               <span class="key indentDouble">Name :</span><span class="value">“action”,</span><br>
               <span class="key indentDouble">Description :</span><span class="value">"fast-paced and include a lot of action like fight scenes, chase scenes."</span>  <br>
               <span class="indent">}</span><br>
-              <span class ="indent key">Director :</span> {<br>
+            <span class ="indent key">Director :</span> {<br>
               <span class="key indentDouble">  Name : </span><span class="value">“Steven Spielberg”,</span><br>
               <span class="key indentDouble">  Bio : </span><span class="value">“Spielberge was born in Ohio and grew up in Arizona. He move to California and studied film in college."</span><br>
                <span class="key indentDouble">  Birth : </span><span class="value">"1946",</span><br>
               <span class="key indentDouble">  Death :</span>" "<br>
-              <span class ="indent key"></span> }<br>
-              <span class ="indent key">Featured : </span><span class="value">False</span><br>
-              <span class ="indent key">imageURL : </span><span class="value"><a href="http://img/jurasssic_park_2.jpeg">"http://img/jurassic_park_2.jpeg"</a></span><br>
+            <span class ="indent key"></span> }<br>
+            <span class ="indent key">ObjectId :</span><span class="value">"641f2c3d67f7cf6cd5fb4a00"</span> <br>
+            <span class ="indent key">Title :</span><span class="value"> "Jurassic Park 2"</span><br>
+            <span class ="indent key">Description :</span> <span class="value">“is based on the 1990 novel written by Michael Crichton. “</span><br>
+            <span class ="indent key">imageURL : </span><span class="value"><a href="http://img/jurasssic_park_2.jpeg">"http://img/jurassic_park_2.jpeg"</a></span><br>
+            <span class ="indent key">Featured : </span><span class="value">False</span><br>
           }<br>  
           </p>
       </div>
@@ -97,7 +97,7 @@
   <div class="flex-container">
       <div class="item item-1">
         <h4 class="header">URL</h4>
-        <p>/movies/genre/[name]</p>
+        <p>/movies/genres/[name]</p>
       </div>
       
       <div class="item item-2">
@@ -196,7 +196,7 @@
   </div> 
 
 <a class ="right" href="#top">top</a>
-<h4 id="updateUser">Update user info. by username.</h4>
+<h4 id="updateUser">Update user info.(username, password, email, date of birth) by username.</h4>
   <div class="flex-container">
       <div class="item item-1">
         <h4 class="header">URL</h4>
