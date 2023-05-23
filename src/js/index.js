@@ -24,7 +24,6 @@ app.use(bodyParser.json());
 //Import auth.js file into project. Must place it AFTER bodyParser middleware
 let auth = require('./auth')(app);
 
-//
 const passport = require('passport');
 require('./passport');
 

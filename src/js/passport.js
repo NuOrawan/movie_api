@@ -13,30 +13,36 @@ let Users = Models.User,
 If there’s a match, the callback function will be executed.*/
 passport.use(new LocalStrategy({
     usernameField: 'Username',
-    passwordField: 'Password'},
-    (username, password, callback)=> {
+    passwordField: 'Password'
+}, (username, password, callback) => {
         console.log(username + ' ' + password);
-        Users.findOne({Username : username}, (error,user) =>{
-            if(error){
-                console.log(error);
-                return callback(error);
-            }
-            if(!user){
+        Users.findOne({Username : username})
+            .then((user) => {
+                if(!user){
                 console.log('incorrect username');
                 return callback(null, false, {message : 'Incorrect username or password'});
-            }
-            console.log('finish');
-            return callback(null, user);
-        });
+                }
+                else {
+                    console.log('finished');
+                    return callback(null,user);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                return callback(error);
+            });
+            
+        
     }));    
+
     //The JWT is extracted from the header of the HTTP request
     passport.use(new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
         secretOrKey: 'your_jwt_secret'
-    }, (jwtPayload,callback)=>{
+    }, (jwtPayload,callback) => {
         return Users.findById(jwtPayload._id)
             .then((user) => {
-                return callback(null,user);
+                return callback(null, user);
             })
             .catch((error) => {
                 return callback(error);
