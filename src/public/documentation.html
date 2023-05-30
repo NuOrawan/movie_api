@@ -19,6 +19,7 @@
   
   <h3>URL Endpoints and Request Methods</h3>
   <ul>
+    <li><a href="#login">User login</a></li>
     <li><a href="#getAllMovies">Get a list of all movies</a></li>
     <li><a href="#getAMovie">Get description, genre, director, featured or not, image URL of a single movie by title.</a></li>
     <li><a href="#getAGenre">Get data about a genre ‘s description by name.</a></li>
@@ -29,6 +30,38 @@
     <li><a href="#removeAMovie">Remove a movie from a user’s list of favorite movies.</a></li>
     <li><a href="#removeUser">Deregister/remove existing users.</a></li>
   </ul>
+  <h4 id="login">User Login</h4>
+  <div class="flex-container">
+      <div class="item item-1">
+        <h4 class="header">URL</h4>
+        <p>/login</p>
+      </div>
+      
+      <div class="item item-2">
+        <h4 class="header">Method</h4>
+        <p class="center">POST</p>
+      </div>
+      
+      <div class="item item-3">
+        <h4 class="header">Request Body Format</h4>
+        <p class="center">None</p>
+      </div>
+      <div class="item item-4">
+        <h4 class="header">Response Body Format</h4>
+        <p>A JSON object holding data about a user and token ID. Example :<br>
+        {<br> 
+        <span class ="indent key"> User {</span><br>
+        <span class ="indent key">username : </span><span class="value">“plgormez”,</span><br>
+        <span class ="indent key">password : </span><span class="value">“PL$2023mz”,</span><br>
+        <span class ="indent key">email : </span><span class="value">“pgormez@gmail.com”,</span><br>
+        <span class ="indent key">FavoriteMovies : </span><span class="value">[“641f2c3d67f7cf6cd5fb4a00”]</span><br> 
+        <span class ="indent key">},</span><br>
+        <span class ="indent key"> token : </span></span><span class="value">“eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9”</span><br>
+        }<br> 
+      </p>
+      </div>
+  </div>   
+  <a class ="right" href="#top">top</a>
   <h4 id="getAllMovies">Get all movies </h4>
   <div class="flex-container">
       <div class="item item-1">
