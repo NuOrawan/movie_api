@@ -13,6 +13,7 @@ const express = require('express'),
    uuid    = require('uuid');      
 let path = require('path');        
 const app = express();
+const { check , validationResult} = require('express-validator');
 
 
 
@@ -20,6 +21,21 @@ const app = express();
 mongoose.connect('mongodb://localhost:27017/myFlixDB', {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use(bodyParser.json());
+// CORS
+const cors = require('cors');
+// Creates a list of allowed domains 
+let allowedOrigins = ['http://localhost:8080','http://testsite.com'];
+app.use(cors({
+    origin: (origin, callback) =>{
+      if(!origin) return callback(null, true);
+      if(allowedOrigins.indexOf(origin) === -1) { // If a specific origin isn’t found on the list of allowed origins
+          let message = 'The CORS policy for this application doesn’t allow access from origin' + origin;
+          return callback(new Error(message), false);
+      }
+    return callback(null, true);  
+    }
+}));
+
 
 //Import auth.js file into project. Must place it AFTER bodyParser middleware
 let auth = require('./auth')(app);
@@ -100,7 +116,21 @@ app.get('/directors/:Name', passport.authenticate('jwt', { session: false }), (r
   Email: String,
   Birthday: Date
 }*/
-app.post('/users', (req,res) =>{
+app.post('/users', 
+  [
+    check('Username', 'Username is required.').isLength(),
+    check('Username', 'Username contains non-alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required.').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid.').isEmail()
+
+  ] , (req,res) =>{
+  // Check the validation object for errors  
+  let errors = validationResult(req);
+  if (!errors.isEmpty()){
+    return res.status(422).json({errors : errors.array()}); // Sent errors to the user in JSON object as an HTTP response
+  }
+  // Hash password before storing it.
+  let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({Username : req.body.Username})
     .then((user) => {
         // If user already exists.
@@ -110,7 +140,7 @@ app.post('/users', (req,res) =>{
             Users
                 .create({
                     Username : req.body.Username,
-                    Password : req.body.Password,
+                    Password : hashedPassword,
                     Email : req.body.Email,
                     Birthday : req.body.Birthday
                 }).then((user) => {res.status(201).json(user)}) //New document named user
@@ -126,7 +156,7 @@ app.post('/users', (req,res) =>{
     });
     
 });
-// Get a user by username
+// Get a user info by username
 app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req,res) =>{
     Users.findOne({Username : req.params.Username})
     .then((user)=>{
@@ -229,7 +259,11 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 
 // Send static file ie. public/documentation.html Currently __dirname is movie_api/src/js
 app.use(express.static(path.join(__dirname, '../public')));
-// Listen for request
+/* Listen for request
 app.listen(8080, () => {
     console.log('Your app is listening on port 8080');
+});*/
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0', () => {
+  console.log('Listening on port ' + port);
 });
