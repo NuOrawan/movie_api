@@ -233,7 +233,7 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
       if(!updatedUser){
         return res.status(404).send('User is not found');  
       } else {
-        res.send(req.params.MovieID + 'is successfully removed to your favorite list.');
+        res.send(req.params.MovieID + 'is successfully removed from your favorite list.');
 
       }
   })
