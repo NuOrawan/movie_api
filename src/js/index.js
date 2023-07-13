@@ -229,7 +229,7 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
     // OPTION 1 
     // This works in mongosh
     // would need to figure out how to get nModified count here by making this async
-    const user = Users.findOne({Username: req.params.Username});
+    var user = Users.findOne({Username: req.params.Username});
     if (!user) {
       return res.status(404).send('User is not found');  
     }
