@@ -225,23 +225,56 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
 });
 // Remove a movie to user's list of favorite movies
 app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
-  Users.findOneAndUpdate({Username: req.params.Username, FavoriteMovies : req.params.MovieID}, {
-    
-    $pull: { FavoriteMovies : req.params.MovieID }
-  },
- {new : true} )
-  .then((updatedUser)=>{
-      if(!updatedUser){
-        return res.status(404).send('User is not found');  
-      } else {
-        res.send(req.params.MovieID + ' is successfully removed from your favorite list.');
+  try {
 
-      }
-  })
-  .catch((error) =>{
-      console.error(error);
-      res.status(500).send('Error' + error);
-  });
+    // OPTION 3
+    // This works in mongosh!
+    db.users.updateOne(
+      { Username: "carlos"}, 
+      { $pull: {FavoriteMovies: ObjectId("641f2de267f7cf6cd5fb4a01") } } 
+    );
+
+    // OPTION 1 
+    // would need to figure out how to get nModified count here by making this async
+    Users.updateOne(
+      {Username: req.params.Username}, 
+      {$pull: {FavoriteMovies: {_id: req.params.MovieID}}}
+    );
+      
+    // OPTION 2
+    const user = Users.findOne({Username: req.params.Username});
+    if (!user) {
+      return res.status(404).send('User is not found');  
+    }
+    const movie = user.FavoriteMovies.findOne({_id: ObjectId(req.params.MovieID)});
+    if (!movie) {d
+      return res.status(404).send('Movie is not found');  
+    } 
+    // @todo delete movie and log here
+
+  } catch(error) {
+    console.error(error);
+    res.status(500).send('Error' + error);
+  }
+
+//   Users.findOneAndUpdate({Username: req.params.Username, FavoriteMovies: req.params.MovieID},
+//     {
+//       $pull: { FavoriteMovies : req.params.MovieID }
+    
+//   },
+//  {new : true} )
+//   .then((updatedUser)=>{
+//       if(!updatedUser){
+//         return res.status(404).send('User is not found');  
+//       } else {
+//         res.send(req.params.MovieID + ' is successfully removed from your favorite list.');
+
+//       }
+//   })
+//   .catch((error) =>{
+//       console.error(error);
+//       res.status(500).send('Error' + error);
+//   });
 });
 
 // Delete a user by username
