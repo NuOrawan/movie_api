@@ -226,30 +226,27 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
 // Remove a movie to user's list of favorite movies
 app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
   try {
-
-    // OPTION 3
-    // This works in mongosh!
-    db.users.updateOne(
-      { Username: "carlos"}, 
-      { $pull: {FavoriteMovies: ObjectId("641f2de267f7cf6cd5fb4a01") } } 
-    );
-
     // OPTION 1 
+    // This works in mongosh
     // would need to figure out how to get nModified count here by making this async
+    const user = Users.findOne({Username: req.params.Username});
+    if (!user) {
+      return res.status(404).send('User is not found');  
+    }
     Users.updateOne(
       {Username: req.params.Username}, 
       {$pull: {FavoriteMovies: {_id: req.params.MovieID}}}
     );
       
     // OPTION 2
-    const user = Users.findOne({Username: req.params.Username});
-    if (!user) {
-      return res.status(404).send('User is not found');  
-    }
-    const movie = user.FavoriteMovies.findOne({_id: ObjectId(req.params.MovieID)});
-    if (!movie) {d
-      return res.status(404).send('Movie is not found');  
-    } 
+    // const user = Users.findOne({Username: req.params.Username});
+    // if (!user) {
+    //   return res.status(404).send('User is not found');  
+    // }
+    // const movie = user.FavoriteMovies.findOne({_id: ObjectId(req.params.MovieID)});
+    // if (!movie) {d
+    //   return res.status(404).send('Movie is not found');  
+    // } 
     // @todo delete movie and log here
 
   } catch(error) {
