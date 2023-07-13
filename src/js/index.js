@@ -185,7 +185,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (r
     { $set:
       {
          Username: req.body.Username,
-         Password: req.body.Password,
+         Password: Users.hashPassword(req.body.Password),
          Email: req.body.Email,
          Birthday: req.body.Birthday
        }
@@ -232,7 +232,7 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
     let user = Users.findOne({Username: req.params.Username});
     if (!user) {
       return res.status(404).send('User is not found');  
-    }
+    } 
     console.log("Found user " + user);
     Users.updateOne(
       {Username: req.params.Username}, 
