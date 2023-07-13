@@ -241,10 +241,7 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
       //   {Username: req.params.Username}, 
       //   {$pull: {FavoriteMovies: {_id: req.params.MovieID}}}
       // );
-      }).catch((error) => {
-        console.error(error);
-        res.status(500).send('Error' + error);
-    });
+      });
       
 
   } catch(error) {
