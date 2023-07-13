@@ -229,26 +229,16 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
     // OPTION 1 
     // This works in mongosh
     // would need to figure out how to get nModified count here by making this async
-    let user = Users.findOne({Username: req.params.Username});
-    if (!user) {
-      return res.status(404).send('User is not found');  
-    } 
-    console.log("Found user " + user);
-    Users.updateOne(
-      {Username: req.params.Username}, 
-      {$pull: {FavoriteMovies: {_id: req.params.MovieID}}}
-    );
+    Users.findOne({Username: req.params.Username}).then((user)=>{
+        console.log("Found user " + user);
+      // Users.updateOne(
+      //   {Username: req.params.Username}, 
+      //   {$pull: {FavoriteMovies: {_id: req.params.MovieID}}}
+      // );
+      }).else(()=>{
+        res.status(404).send("No user found");
+      });
       
-    // OPTION 2
-    // const user = Users.findOne({Username: req.params.Username});
-    // if (!user) {
-    //   return res.status(404).send('User is not found');  
-    // }
-    // const movie = user.FavoriteMovies.findOne({_id: ObjectId(req.params.MovieID)});
-    // if (!movie) {d
-    //   return res.status(404).send('Movie is not found');  
-    // } 
-    // @todo delete movie and log here
 
   } catch(error) {
     console.error(error);
