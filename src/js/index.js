@@ -233,6 +233,7 @@ app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { se
     if (!user) {
       return res.status(404).send('User is not found');  
     }
+    console.log("Found user " + user.Username);
     Users.updateOne(
       {Username: req.params.Username}, 
       {$pull: {FavoriteMovies: {_id: req.params.MovieID}}}
