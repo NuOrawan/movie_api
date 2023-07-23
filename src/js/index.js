@@ -225,48 +225,25 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
 });
 // Remove a movie to user's list of favorite movies
 app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
-  try {
-    // OPTION 1 
-    // This works in mongosh
-    // would need to figure out how to get nModified count here by making this async
-    Users.findOne({Username: req.params.Username}).then((user)=>{
-        
-        if(!user){
-          return res.status(404).send('User is not found.');
-        } else {
-          console.log("Found user " + user);
-         
-        }
-      // Users.updateOne(
-      //   {Username: req.params.Username}, 
-      //   {$pull: {FavoriteMovies: {_id: req.params.MovieID}}}
-      // );
-      });
-      
-
-  } catch(error) {
-    console.error(error);
-    res.status(500).send('Error' + error);
-  }
-
-//   Users.findOneAndUpdate({Username: req.params.Username, FavoriteMovies: req.params.MovieID},
-//     {
-//       $pull: { FavoriteMovies : req.params.MovieID }
+  
+  Users.findOneAndUpdate({Username: req.params.Username, FavoriteMovies: req.params.MovieID},
+    {
+      $pull: { FavoriteMovies : req.params.MovieID }
     
-//   },
-//  {new : true} )
-//   .then((updatedUser)=>{
-//       if(!updatedUser){
-//         return res.status(404).send('User is not found');  
-//       } else {
-//         res.send(req.params.MovieID + ' is successfully removed from your favorite list.');
+  },
+ {new : true} )
+  .then((updatedUser)=>{
+      if(!updatedUser){
+        return res.status(404).send('User is not found');  
+      } else {
+        res.send(req.params.MovieID + ' is successfully removed from your favorite list.');
 
-//       }
-//   })
-//   .catch((error) =>{
-//       console.error(error);
-//       res.status(500).send('Error' + error);
-//   });
+      }
+  })
+  .catch((error) =>{
+      console.error(error);
+      res.status(500).send('Error' + error);
+  });
 });
 
 // Delete a user by username
