@@ -137,7 +137,7 @@ app.post('/users',
     .then((user) => {
         // If user already exists.
         if(user){
-            return res.status(400).send(req.body.Username + 'already exists.');
+            return res.status(400).send(req.body.Username + ' already exists.');
         } else {
             Users
                 .create({
