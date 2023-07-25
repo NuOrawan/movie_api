@@ -20,7 +20,7 @@ https://myflix-movie-member-only-c275ba23a94d.herokuapp.com/
 * The app is deployed to a publicly accessible platform like GitHub Pages, Heroku and MongoDB Atlas.
 * The app handles errors and input validation in order to show user-friendly error messages.
 * Only registered users can “READ” data about movies, “UPDATE” their profile, or “DELETE” their profile, but any anonymous client can “CREATE” a new user.
-* The app generate a token after user’s login for security.
+* The app uses basic HTTP authentication via username and password and JWT for user authentication.
 
 ## Technologies 
 * MongoDB
